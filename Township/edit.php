@@ -11,23 +11,22 @@
 
 <body>
     <?php
-    require_once "../DB.php";
-    $db = new DB();
+    require_once "../controller/TownshipController.php";
+    require_once "../controller/RegionController.php";
+    $township = new TownshipController();
+    $region = new RegionController();
+    $regions = $region->index();
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $table_name = "township";
-        $region = $db->show($table_name, $id);
-        if (mysqli_num_rows($region)) {
-            foreach ($region as $data) {
-                $name = $data['name'];
-                $id = $data['id'];
-            }
+        $township = $township->show($id);
+        if ($township) {
+            $name = $township->name;
+            $region_id = $township->region_id;
         }
     }
     if (isset($_POST['update'])) {
         $id = $_POST['id'];
-        $db->update($table_name,$_POST,$id);
-        header('location:index.php');
+        $township->update($_POST, $id);
     }
     ?>
     <div class="w-4/12 mx-auto my-10 text-base">
@@ -40,13 +39,23 @@
                 <input placeholder="name" value="<?php echo $name ?>" type="text" required name="name"
                     class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
             </div>
-            <div>
-                <button type="submit" name="update"
-                    class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">register</button>
-                <a href="index.php"
-                    class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Back</a>
+            <div class="mb-3">
+                <label class="block mb-1 ml-1">region</label>
+                <select placeholder="region" name="region_id" required
+                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1">
+                    <?php foreach ($regions as $region) : ?>
+                    <option value="<?php echo $region->id ?>"><?php echo $region->name ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
-        </form>
+    </div>
+    <div>
+        <button type="submit" name="update"
+            class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">register</button>
+        <a href="index.php"
+            class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Back</a>
+    </div>
+    </form>
     </div>
 </body>
 

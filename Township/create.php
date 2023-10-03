@@ -11,12 +11,13 @@
 
 <body>
     <?php
-    require_once "../DB.php";
-    $db = new DB();
+    require_once "../controller/TownshipController.php";
+    require_once "../controller/RegionController.php";
+    $township = new TownshipController();
+    $region = new RegionController();
+    $regions = $region->index();
     if (isset($_POST['create'])) {
-        $table_name = "townships";
-        $db->store($table_name, $_POST);
-        header("location:index.php");
+        $township->store($_POST);
     }
     ?>
     <div class="w-4/12 mx-auto my-10 text-base">
@@ -27,34 +28,18 @@
                     class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
             </div>
             <div class="mb-3">
-                <label class="block mb-1 ml-1">region_id</label>
-                <input placeholder="region" type="text" required name="region_id"
-                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
+                <label class="block mb-1 ml-1">region</label>
+                <select placeholder="region" name="region_id" required
+                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1">
+                    <?php foreach ($regions as $region) : ?>
+                    <option value="<?php echo $region->id ?>"><?php echo $region->name ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
-            <div class="mb-3">
-                <label class="block mb-1 ml-1">Crime</label>
-                <input placeholder="crime" type="text" required name="crime"
-                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
-            </div>
-            <div class="mb-3">
-                <label class="block mb-1 ml-1">sentenced</label>
-                <input placeholder="sentenced" type="text" required name="sentenced"
-                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
-            </div>
-            <div class="mb-3">
-                <label class="block mb-1 ml-1">escaped</label>
-                <input placeholder="escaped" type="text" required name="escaped"
-                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
-            </div>
-            <div class="mb-3">
-                <label class="block mb-1 ml-1">latest Updated</label>
-                <input placeholder="latest updated" type="date" required name="latest_updated"
-                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
-            </div>
             <div>
-                <button type="submit" name="create"
-                    class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">register</button>
+                <button type=" submit" name="create"
+                    class="text-white button bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">create</button>
                 <a href="index.php"
                     class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Back</a>
             </div>

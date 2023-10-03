@@ -11,24 +11,18 @@
 
 <body>
     <?php
-    require_once "../DB.php";
-    $db = new DB();
+    require_once "../controller/RegionController.php";
+    $regionController = new RegionController();
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $table_name = "regions";
-        $region = $db->show($table_name, $id);
-        if (mysqli_num_rows($region)) {
-            foreach ($region as $data) {
-                $name = $data['name'];
-                $id = $data['id'];
-            }
+        $region = $regionController->show($id);
+        if ($region) {
+            $name = $region->name;
         }
     }
     if (isset($_POST['update'])) {
         $id = $_POST['id'];
-        $table_name = "regions";
-        $db->update($table_name,$_POST,$id);
-        header('location:index.php');
+        $regionController->update($_POST, $id);
     }
     ?>
     <div class="w-4/12 mx-auto my-10 text-base">

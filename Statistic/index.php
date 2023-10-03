@@ -11,12 +11,12 @@
 
 <body>
     <?php
-    require_once("../controller/RegionController.php");
-    $regionController = new RegionController();
-    $regions = $regionController->index($table_name);
+    require_once("../controller/StatisticController.php");
+    $statisticController = new StatisticController();
+    $statistics = $statisticController->index($table_name);
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $regionController->delete($id);
+        $statisticController->delete($id);
     }
     ?>
     <div class="w-8/12 mx-auto my-10">
@@ -27,26 +27,41 @@
                         ID
                     </th>
                     <th class="px-6 py-3">
-                        NAME
+                        crime
                     </th>
                     <th class="px-6 py-3">
-                        EMAIL
+                        sentenced
+                    </th>
+                    <th class="px-6 py-3">
+                        escaped
+                    </th>
+                    <th class="px-6 py-3">
+                        township
                     </th>
                     <th>
-                        <a href="/Region/create.php">CREATE</a>
+                        <a href="/Statistic/create.php">CREATE</a>
                     </th>
                 </tr>
             </thead>
             <tbody class="text-sm text-black bg-sky-300 border-b border-gray-400 dark:text-white">
                 <?php
-                foreach ($regions as $region) :
+                foreach ($statistics as $region) :
                 ?>
                 <tr>
                     <td class="px-6 py-3">
                         <?php echo $region->id; ?>
                     </td>
                     <td class="px-6 py-3">
-                        <?php echo $region->name; ?>
+                        <?php echo $region->crime; ?>
+                    </td>
+                    <td class="px-6 py-3">
+                        <?php echo $region->sentenced; ?>
+                    </td>
+                    <td class="px-6 py-3">
+                        <?php echo $region->escaped; ?>
+                    </td>
+                    <td class="px-6 py-3">
+                        <?php echo $region->township_name; ?>
                     </td>
                     <td>
                         <a href="/Region/edit.php?id=<?php echo $region->id; ?>"
