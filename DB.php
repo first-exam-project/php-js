@@ -2,56 +2,21 @@
 class DB
 {
     public $db;
+
     public function __construct()
     {
         $hostName = "localhost";
         $userName = "admin";
-        $password = "!Zawmyohtet123";
+        $password = "!Zawmyohtet123"; // Enclose the password in quotes
         $databaseName = "exam";
-        $this->db = new mysqli($hostName, $userName, $password, $databaseName);
-        if (!$this->db) {
-            echo "Connected successfully";
-        }
-    }
-    public function index($table)
-    {
-        $query = "SELECT * FROM $table";
-        $data = $this->db->query($query);
-        return $data;
-    }
-    public function store($table, $request)
-    {
-        $keys = "";
-        $values = "";
-        foreach ($request as $key => $value) {
-            if ($key !== 'create') {
-                $keys .= "`$key`, ";
-                $values .= "'$value', ";
+        try {
+            $this->db = new PDO("mysql:host=$hostName;dbname=$databaseName", $userName, $password);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if (!$this->db) {
+                echo "Connected successfully";
             }
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
         }
-        $realkeys = substr($keys, 0, -2);
-        $realvalues = substr($values, 0, -2);
-        $query = "INSERT INTO $table($realkeys) VALUES($realvalues)";
-        $data = $this->db->query($query);
-        return $data;
-    }
-    public function show($table, $id)
-    {
-        $query = "SELECT * FROM $table WHERE id=$id";
-        $data = $this->db->query($query);
-        return $data;
-    }
-    public function update($table, $request, $id)
-    {
-        $name = $request['name'];
-        $query = "UPDATE $table SET name='$name' WHERE id=$id";
-        $data = $this->db->query($query);
-        return $data;
-    }
-    public function delete($table, $id)
-    {
-        $query = "DELETE FROM $table WHERE id=$id";
-        $data = $this->db->query($query);
-        return $data;
     }
 }
