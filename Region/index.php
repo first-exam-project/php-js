@@ -20,8 +20,8 @@
     }
     ?>
     <div class="w-8/12 mx-auto my-10">
-        <table class="w-full text-sm text-left text-blue-900 dark:text-blue-900">
-            <thead class="text-sm text-white bg-gray-600 border-b border-gray-400 dark:text-white">
+        <table class="w-full text-sm text-left text-blue-900">
+            <thead class="text-lg bg-white border-b border-gray-400 text-gray-500 ">
                 <tr>
                     <th class="px-6 py-3">
                         ID
@@ -29,15 +29,12 @@
                     <th class="px-6 py-3">
                         NAME
                     </th>
-                    <th class="px-6 py-3">
-                        EMAIL
-                    </th>
                     <th>
                         <a href="/Region/create.php">CREATE</a>
                     </th>
                 </tr>
             </thead>
-            <tbody class="text-sm text-black bg-sky-300 border-b border-gray-400 dark:text-white">
+            <tbody class="text-md text-black bg-sky-500  border-b border-gray-400 dark:text-white">
                 <?php
                 foreach ($regions as $region) :
                 ?>
@@ -59,7 +56,7 @@
             </tbody>
         </table>
     </div>
-
+        
 </body>
 
 </html>
