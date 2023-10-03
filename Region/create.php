@@ -11,12 +11,10 @@
 
 <body>
     <?php
-    require_once "../DB.php";
-    $db = new DB();
+    require_once "../controller/RegionController.php";
+    $regionController = new RegionController();
     if (isset($_POST['create'])) {
-        $table_name = "regions";
-        $db->store($table_name, $_POST);
-        header("location:index.php");
+        $regionController->store($_POST);
     }
     ?>
     <div class="w-4/12 mx-auto my-10 text-base">
