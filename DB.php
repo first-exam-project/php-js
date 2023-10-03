@@ -5,8 +5,8 @@ class DB
     public function __construct()
     {
         $hostName = "localhost";
-        $userName = "root";
-        $password = 2005;
+        $userName = "admin";
+        $password = "!Zawmyohtet123";
         $databaseName = "exam";
         $this->db = new mysqli($hostName, $userName, $password, $databaseName);
         if (!$this->db) {

@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body style="background-image: url(../images/backgroundimage.jpg);">
     <?php
     require_once "../DB.php";
     $db = new DB();
@@ -34,7 +34,7 @@
     <div class="w-4/12 mx-auto my-10 text-base">
         <form action="edit.php" method="POST">
             <div class="mb-3">
-                <label class="block mb-1 ml-1">NAME</label>
+                <label class="block mb-1 ml-1 text-white">NAME</label>
 
                 <input placeholder="name" value="<?php echo $id ?>" type="hidden" required name="id"
                     class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
@@ -43,9 +43,9 @@
             </div>
             <div>
                 <button type="submit" name="update"
-                    class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">register</button>
+                class="text-white bg-blue-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Edit</button>
                 <a href="index.php"
-                    class="text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 dark:focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Back</a>
+                class="text-gray-800 text-white bg-green-400 font-medium rounded-lg text-sm px-6 py-3 text-center mr-2 mb-2">Back</a>
             </div>
         </form>
     </div>

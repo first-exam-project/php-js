@@ -23,8 +23,7 @@
         <form action="create.php" method="POST">
             <div class="mb-3">
                 <label class="block mb-1 ml-1">NAME</label>
-                <input placeholder="name" type="text" required name="name"
-                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
+                <input placeholder="name" type="text" required name="name" class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
             </div>
             <div class="mb-3">
                 <label class="block mb-1 ml-1">region_id</label>
