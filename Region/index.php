@@ -13,7 +13,7 @@
     <?php
     require_once("../controller/RegionController.php");
     $regionController = new RegionController();
-    $regions = $regionController->index($table_name);
+    $regions = $regionController->index();
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $regionController->delete($id);

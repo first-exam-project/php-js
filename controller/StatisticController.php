@@ -1,5 +1,6 @@
 <?php
 require_once "../DB.php";
+require_once "../controller/TownshipController.php";
 class StatisticController extends DB
 {
     protected $table = "statistics";
@@ -11,12 +12,17 @@ class StatisticController extends DB
     }
     public function store($request)
     {
-        $query = "INSERT INTO $this->table (`crime`, `sentenced`, `escaped`,`township_id`,`region_id`) VALUES (:crime, :sentenced, :escaped, :township_id, 8)";
+
+        $township = new TownshipController();
+        $data = $township->show($request['township_id']);
+        $region = $data->region_id;
+        $query = "INSERT INTO $this->table (`crime`, `sentenced`, `escaped`,`township_id`,`region_id`) VALUES (:crime, :sentenced, :escaped, :township_id, :region_id)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(":crime", $request['crime']);
         $stmt->bindParam(":sentenced", $request['sentenced']);
         $stmt->bindParam(":escaped", $request['escaped']);
         $stmt->bindParam(":township_id", $request['township_id']);
+        $stmt->bindParam(":region_id", $region);
         if ($stmt->execute()) {
             header('Location: http://localhost:8000/Statistic');
         } else {
@@ -36,12 +42,16 @@ class StatisticController extends DB
     }
     public function update($request, $id)
     {
-        $stmt = $this->db->prepare("UPDATE $this->table SET crime=:crime, latest_updated= NOW(), sentenced=:sentenced,`escaped`=:escaped,township_id=:township_id WHERE id=:id");
+        $township = new TownshipController();
+        $data = $township->show($request['township_id']);
+        $region = $data->region_id;
+        $stmt = $this->db->prepare("UPDATE $this->table SET crime=:crime, latest_updated= NOW(), sentenced=:sentenced,`escaped`=:escaped,township_id=:township_id,region_id=:region_id WHERE id=:id");
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":crime", $request['crime']);
         $stmt->bindParam(":sentenced", $request['sentenced']);
         $stmt->bindParam(":escaped", $request['escaped']);
         $stmt->bindParam(":township_id", $request['township_id']);
+        $stmt->bindParam(":region_id", $region);
         if ($stmt->execute()) {
             header('Location: http://localhost:8000/Statistic');
         } else {
