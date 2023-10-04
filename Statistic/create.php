@@ -14,7 +14,7 @@
     require_once "../controller/StatisticController.php";
     $statstic = new StatisticController();
     if (isset($_POST['create'])) {
-        $statstic->update($_POST, "2");
+        $statstic->store($_POST);
     }
     ?>
     <div class="w-4/12 mx-auto my-10 text-base">
