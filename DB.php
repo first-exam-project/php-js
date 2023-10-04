@@ -5,8 +5,8 @@ class DB
     public function __construct()
     {
         $hostName = "localhost";
-        $userName = "admin";
-        $password = "!Zawmyohtet123"; // Enclose the password in quotes
+        $userName = "root";
+        $password = "2005"; // Enclose the password in quotes
         $databaseName = "exam";
         try {
             $this->db = new PDO("mysql:host=$hostName;dbname=$databaseName", $userName, $password);
