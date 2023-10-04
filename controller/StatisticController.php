@@ -11,7 +11,7 @@ class StatisticController extends DB
     }
     public function store($request)
     {
-        $query = "INSERT INTO $this->table (`crime`, `sentenced`, `escaped`,`township_id`,`region_id`) VALUES (:crime, :sentenced, :escaped, :township_id,12)";
+        $query = "INSERT INTO $this->table (`crime`, `sentenced`, `escaped`,`township_id`,`region_id`) VALUES (:crime, :sentenced, :escaped, :township_id, 8)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(":crime", $request['crime']);
         $stmt->bindParam(":sentenced", $request['sentenced']);

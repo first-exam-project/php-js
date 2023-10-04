@@ -39,6 +39,11 @@
                 <input placeholder="name" type="text" required name="sentenced"
                     class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
             </div>
+            <div class="mb-3">
+                <label class="block mb-1 ml-1">NAME</label>
+                <input placeholder="name" type="text" required name="region_id"
+                    class="border-2 focus:outline-none focus:border-blue-200 border-gray-500 rounded-lg w-full p-1 ">
+            </div>
 
             <div>
                 <button type=" submit" name="create"
