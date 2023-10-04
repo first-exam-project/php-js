@@ -2,7 +2,6 @@
 class DB
 {
     public $db;
-
     public function __construct()
     {
         $hostName = "localhost";
@@ -12,9 +11,6 @@ class DB
         try {
             $this->db = new PDO("mysql:host=$hostName;dbname=$databaseName", $userName, $password);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            if (!$this->db) {
-                echo "Connected successfully";
-            }
         } catch (PDOException $e) {
             die("Connection failed: " . $e->getMessage());
         }
