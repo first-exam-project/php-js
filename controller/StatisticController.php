@@ -12,6 +12,7 @@ class StatisticController extends DB
     }
     public function store($request)
     {
+
         $township = new TownshipController();
         $data = $township->show($request['township_id']);
         $region = $data->region_id;
