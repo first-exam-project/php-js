@@ -5,7 +5,7 @@ class RegionController extends DB
     protected $table = "regions";
     public function index()
     {
-        $query = "SELECT $this->table.name,$this->table.id FROM $this->table";
+        $query = "SELECT regions.name,regions.id FROM regions";
         $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
@@ -49,7 +49,7 @@ class RegionController extends DB
     {
         $query = "DELETE FROM $this->table WHERE id=:id";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id);
         if ($stmt->execute()) {
             header('Location: http://localhost:8000/Region');
         } else {
